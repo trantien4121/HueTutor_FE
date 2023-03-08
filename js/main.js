@@ -84,14 +84,6 @@ $(function () {
 	};
 	
 	siteMenuClone();	
-	async function fetchMovies() {
-		const response = await fetch('http://localhost:8080/api/v1/Users/image/3');
-		// waits until the request completes...
-		console.log(response);
-	  }
-
-	fetchMovies();
-	
 });
 
 

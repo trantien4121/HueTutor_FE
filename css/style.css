@@ -172,10 +172,10 @@ a:hover {
 .site-navbar .site-navigation .site-menu .has-children .dropdown {
   visibility: hidden;
   opacity: 0;
-  top: 100%;
+  top: 120%;  /*cũ là 100%*/
   position: absolute;
   text-align: left;
-  border-top: 2px solid #007bff;
+  border-top: 3px solid #007bff;  /*Trước là 2px*/
   -webkit-box-shadow: 0 2px 10px -2px rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 10px -2px rgba(0, 0, 0, 0.1);
   padding: 0px 0;
@@ -504,7 +504,8 @@ a:hover {
 }
 
 .sticky-wrapper .site-navbar ul li a {
-  color: rgba(255, 255, 255, 0.7) !important;
+  /* color: rgba(255, 255, 255, 0.7) !important; */ /*------------------------------------------------------------------------------------------*/
+  color: black;
 }
 
 .sticky-wrapper .site-navbar ul li a.active {
