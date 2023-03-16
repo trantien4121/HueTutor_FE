@@ -8,7 +8,7 @@
     height: 100%;
 }
 .account-settings .user-profile {
-    margin: 5rem 0 1rem 0;
+    margin: 2rem 0 1rem 0;
     padding-bottom: 1rem;
     text-align: center;
 }
@@ -26,7 +26,7 @@
 .account-settings .user-profile h5.user-name {
     margin: 0 0 0.5rem 0;
 }
-.account-settings .user-profile h6.user-email {
+.account-settings .user-profile h6.user-email, h6.like-tutor {
     margin: 0;
     font-size: 0.8rem;
     font-weight: 400;
@@ -76,3 +76,12 @@ input[type="file"] {
     top: -60px;
     right: -54px;
 }
+.field-icon {
+    float: right;
+    margin-right: 12px;
+    margin-top: -28px;
+    position: relative;
+    z-index: 2;
+    font-size: 14px;
+    cursor: pointer;
+  }

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thời khóa biểu</title>
+</head>
+
+<body>
+    <h1>Timetable</h1>
+</body>
+
+<script>
+    const today = new Date();
+
+
+    // Get the first day of the current week (Monday)
+    function getFirstDayOfWeek(d) {
+        // clone date object, so we don't mutate it
+        const date = new Date(d);
+        const day = date.getDay(); // get day of week
+
+        // day of month - day of week (-6 if Sunday), otherwise +1
+        const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+
+        return new Date(date.setDate(diff));
+    }
+
+    const firstDay = getFirstDayOfWeek(today);
+
+    // Get the last day of the current week (Sunday)
+    const lastDay = new Date(firstDay);
+    lastDay.setDate(lastDay.getDate() + 6);
+
+    console.log(firstDay);
+    console.log(lastDay);
+
+    console.log(firstDay.toLocaleDateString()); //ngày đầu tiên trong tuần theo định dạng vd: 10/3/2023
+    console.log(lastDay.toLocaleDateString());  //ngày đầu tiên trong tuần theo định dạng vd: 16/3/2023
+
+    var current_day = today.getDay();
+    var day_name = '';
+    switch (current_day) {
+        case 0:
+            day_name = "Chủ nhật";
+            break;
+        case 1:
+            day_name = "Thứ hai";
+            break;
+        case 2:
+            day_name = "Thứ ba";
+            break;
+        case 3:
+            day_name = "Thứ tư";
+            break;
+        case 4:
+            day_name = "Thứ năm";
+            break;
+        case 5:
+            day_name = "Thứ sáu";
+            break;
+        case 6:
+            day_name = "Thứ bảy";
+    }
+
+    console.log(day_name);  //in ra màn hình thứ hiện tại trong tuần (ví dụ: thứ 6)
+
+
+</script>
+
+
+</html>

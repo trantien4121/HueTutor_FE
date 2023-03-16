@@ -1,4 +1,5 @@
-const apiTutors = `http://localhost:8080/api/v1/Tutors`;
+//Chỉ hiển thị 6 gia sư
+const apiTutors = `http://localhost:8080/api/v1/Tutors/getTutorPaging?pageSize=6`;
 const getOutstandingtutor = (callback) => {
     fetch(apiTutors)
         .then((response) => {

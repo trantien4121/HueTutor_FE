@@ -51,9 +51,9 @@ if (checkLoginStatus()) {
         <a href="#profile-section" class="nav-link" style="padding: 20px"> <img src="http://localhost:8080/api/v1/Users/image/${user.data.userId}" alt="${fullname}"
         width="24" height="24" class="mr-1 rounded-circle"> ${fullname}</a>
         <ul class="dropdown arrow-top">
-          <li><a href="#info-section" class="nav-link"><i class="mr-2 bi bi-info-circle"></i>Quản lý thông tin</a></li>
+          <li><a href="userProfile.html" class="nav-link"><i class="mr-2 bi bi-info-circle"></i>Quản lý thông tin</a></li>
           <li><a href="#pricing-section" class="nav-link"><i class="mr-2 bi bi-clipboard-check"></i>Lớp học</a></li>
-          <li><a href="#pricing-section" class="nav-link"><i class="mr-2 bi bi-calendar-day"></i>Thời khóa biểu</a></li>
+          <li><a href="timeTable.html" class="nav-link"><i class="mr-2 bi bi-calendar-day"></i>Thời khóa biểu</a></li>
           <li><a href="" id="logoutBtn" class="nav-link"><i class="mr-2 bi bi-box-arrow-right"></i>Đăng xuất</a></li>
         </ul>
       </li>`;
@@ -64,9 +64,9 @@ if (checkLoginStatus()) {
         <a href="#profile-section" class="nav-link" style="padding: 20px"> <img src="http://localhost:8080/api/v1/Users/image/${user.data.userId}" alt="${fullname}"
         width="24" height="24" class="mr-1 rounded-circle"> ${fullname}</a>
         <ul class="dropdown arrow-top">
-          <li><a href="#info-section" class="nav-link"><i class="mr-2 bi bi-info-circle"></i>Quản lý thông tin</a></li>
+          <li><a href="userProfile.html" class="nav-link"><i class="mr-2 bi bi-info-circle"></i>Quản lý thông tin</a></li>
           <li><a href="#pricing-section" class="nav-link"><i class="mr-2 bi bi-clipboard-check"></i>Lớp học</a></li>
-          <li><a href="#pricing-section" class="nav-link"><i class="mr-2 bi bi-calendar-day"></i>Thời khóa biểu</a></li>
+          <li><a href="timeTable.html" class="nav-link"><i class="mr-2 bi bi-calendar-day"></i>Thời khóa biểu</a></li>
           <li><a href="" id="logoutBtn" class="nav-link"><i class="mr-2 bi bi-box-arrow-right"></i>Đăng xuất</a></li>
         </ul>
       </li>`;
