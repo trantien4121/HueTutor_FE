@@ -39,7 +39,7 @@ function showOutstandingBlogs() {
             colClass.setAttribute("class", "col-lg-4 col-md-12 col-sm-12");
             colClass.innerHTML = `
             <a href="tutor.html?ID=${blog.advertisementId}">
-                <img src=http://localhost:8080/api/v1/Advertisements/image/${blog.advertisementId} alt="" width="100%"
+                <img src=http://localhost:8080/api/v1/Advertisements/image/${blog.advertisementId} class="blog-img" alt="" width="100%"
                 height=120vh>
             </a>
             `;
@@ -67,7 +67,7 @@ function showOutstandingBlogs() {
 
 
             const card = document.createElement("div");
-            card.setAttribute("class", "card mt-1 mb-1");
+            card.setAttribute("class", "card mt-1 mb-1 card-advs");
 
             const rowCard = document.createElement("div");
             rowCard.setAttribute("class", "row no-gutters row-blog__OST");

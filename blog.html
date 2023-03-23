@@ -165,6 +165,11 @@
         </form>
     </div>
 
+    <!-- Back to top button -->
+    <button type="button" class="btn btn-floating btn-lg" id="btn-back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
     <!-- Blog section-->
     <div class="outstanding-blog-section pb-5">
         <div class="container">
@@ -176,12 +181,13 @@
                 </div>
             </div> -->
             <div class="row pt-3">
-                <div class="col-lg-8 col-md-12 col-xs-12">    
+                <div class="col-lg-8 col-md-12 col-xs-12">
                     <div class="card mt-3 card-custom">
                         <div class="card-header">
                             <b style="font-size: 16px;">Danh mục bài viết</b>
                         </div>
-                        <div class="progress"  role="progressbar" aria-label="Example 2px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 2px">
+                        <div class="progress" role="progressbar" aria-label="Example 2px high" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100" style="height: 2px">
                             <div class="progress-bar" style="width: 12%"></div>
                         </div>
                         <div class="card-body card-blog-left">
@@ -204,6 +210,11 @@
                                 </div>
                             </div> -->
                         </div>
+                        <div class="progress" role="progressbar" aria-label="Example 2px high" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100" style="height: 1px">
+                            <div class="progress-bar" style="width: 0%"></div>
+                        </div>
+                        <a href="#" id="loadMore">Load More</a>
                     </div>
 
                 </div>
@@ -212,9 +223,10 @@
                         <div class="card-header">
                             <b style="font-size: 16px;">Bài viết mới</b>
                         </div>
-                        <div class="progress"  role="progressbar" aria-label="Example 2px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 2px">
+                        <div class="progress" role="progressbar" aria-label="Example 2px high" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100" style="height: 2px">
                             <div class="progress-bar" style="width: 20%"></div>
-                          </div>
+                        </div>
                         <div class="card-body card-blog">
                             <!-- <div class="card mb-3">
                                 <div class="row no-gutters row-tutor__OST">
@@ -238,16 +250,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="pagination-custom">
-        <!-- <li class="page-item-custom previous-page-custom disable"><a href="#" class="page-link-custom">Pre</a></li>
-        <li class="page-item-custom current-page active"><a href="#" class="page-link-custom">1</a></li>
-        <li class="page-item-custom dots"><a href="#" class="page-link-custom">...</a></li>
-        <li class="page-item-custom current-page"><a href="#" class="page-link-custom">1</a></li>
-        <li class="page-item-custom current-page"><a href="#" class="page-link-custom">1</a></li>
-        <li class="page-item-custom current-page"><a href="#" class="page-link-custom">1</a></li>
-        <li class="page-item-custom next-page-custom"><a href="#" class="page-link-custom">Next</a></li> -->
     </div>
 
     <!-- Footer section-->
@@ -336,79 +338,49 @@
     <script src="./js/login.js" type="module"></script>
 
     <script type="text/javascript">
-        function getPageList(totalPages, page, maxLength) {
-            function range(start, end) {
-                return Array.from(Array(end - start + 1), (_, i) => i + start);
-            }
-            var sideWidth = maxLength < 9 ? 1 : 2;
-            var leftWidth = (maxLength - sideWidth * 2 - 3) >> 1;
-            var rightWidth = (maxLength - sideWidth * 2 - 3) >> 1;
 
-            if (totalPages <= maxLength) {
-                return range(1, totalPages);
-            }
-
-            if (page <= maxLength - sideWidth - 1 - rightWidth) {
-                return range(1, maxLength - sideWidth - 1).concat(0, range(totalPages - sideWidth + 1, totalPages));
-
-            }
-
-            if (page >= totalPages - sideWidth - 1 - rightWidth) {
-                return range(1, sideWidth).concat(0, range(totalPages - sideWidth - 1 - rightWidth - leftWidth, totalPages));
-            }
-
-            return range(1, sideWidth).concat(0, range(page - leftWidth, page + rightWidth), 0, range(totalPages - sideWidth + 1, totalPages));
-
-        }
-        $(function () {
-            var numberOfItems = 11;
-            var limitPerPage = 6; //Số lượng gia sư hiển thị trên 1 page
-            var totalPage = Math.ceil(numberOfItems / limitPerPage);
-            var paginationSize = 2 //Số lượng trang hiển thị trên UI của Pagination
-            var currentPAge;
-
-
-            function showPage(whichPage) {
-                if (whichPage < 1 || whichPage > totalPage) return false;
-                currentPAge = whichPage;
-
-                $(".row-blog .list-blog-render").hide().slice((currentPAge-1) * limitPerPage, currentPAge * limitPerPage).show();
-
-                $(".pagination-custom li").slice(1, -1).remove();
-                getPageList(totalPage, currentPAge, paginationSize).forEach(item => {
-                    $("<li>").addClass("page-item-custom").addClass(item ? "current-page" : "dots")
-                        .toggleClass("active", item === currentPAge).append($("<a>").addClass("page-link-custom")
-                            .attr({ href: "javascript:void(0)" }).text(item || "...")).insertBefore(".next-page-custom")
-                });
-
-                $(".previous-page-custom").toggleClass("disable", currentPAge === 1);
-                $(".next-page-custom").toggleClass("disable", currentPAge === totalPage);
-                return true;
-            }
-
-            $(".pagination-custom").append(
-                $("<li>").addClass("page-item-custom").addClass("previous-page-custom").append($("<a>").addClass("page-link-custom").attr({ href: "javscript:void(0)" }).append("<span>").addClass("icon-chevron-left")),
-                $("<li>").addClass("page-item-custom").addClass("next-page-custom").append($("<a>").addClass("page-link-custom").attr({ href: "javscript:void(0)" }).append("<span>").addClass("icon-chevron-right")), //cũ là .text("next")
-            );
-
-            $(".row-blog").show();
-           
-            window.addEventListener("load", () => {
-                showPage(1);
-            })
-            
-            $(document).on("click", ".pagination-custom li.current-page:not(.active)", function () {
-                return showPage(+$(this).text());
-            });
-
-            $(".next-page-custom").on("click", function () {
-                return showPage(currentPAge + 1);
-            });
-
-            $(".previous-page-custom").on("click", function () {
-                return showPage(currentPAge - 1);
-            });
+        /*Click button load more to load card-advertisement*/
+        window.addEventListener("load", () => {
+            $(".card-advs").slice(0, 4).show();
         });
+        $(document).ready(function () {
+            $("#loadMore").on("click", function (e) {
+                e.preventDefault();
+                $(".card-advs:hidden").slice(0, 4).slideDown();
+                if ($(".card-advs:hidden").length == 0) {
+                    $("#loadMore").text("...").addClass("noContent");
+                }
+            });
+
+        });
+
+        /*Scrool to top*/
+        
+        //Get the button
+        let mybutton = document.getElementById("btn-back-to-top");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (
+                document.body.scrollTop > 700 ||
+                document.documentElement.scrollTop > 700
+            ) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        // When the user clicks on the button, scroll to the top of the document
+        mybutton.addEventListener("click", backToTop);
+
+        function backToTop() {
+            $("html, body").animate({ scrollTop: "0" }, 1000); 
+        }
+
     </script>
 
 

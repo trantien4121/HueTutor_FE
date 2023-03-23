@@ -1,0 +1,223 @@
+html{
+	height: 100%;
+}
+body{
+	height: 100%;
+}
+footer{
+	position: sticky;
+	top: 100%;
+}
+@media screen and (max-width:768px){
+	.home-filter__btn:not(.home-filter__btn--active){
+        display: none !important;
+    }
+    .hide-on-tablet{
+        display: none;
+    }
+}
+@media screen and (max-width: 576px){
+    .home-filter__btn:not(.home-filter__btn--active){
+        display: none !important;
+    }
+}
+/*ẩn ouline mặc định của btn sau kho click*/
+.btn:focus{
+	outline:none;
+	box-shadow: none;
+}
+.btn:hover{
+	color: #fff;
+	background-color: #2c6dd5;
+}
+.class-manager-section{
+    margin: 0;
+    padding-top: 40px;
+    color: #2e323c;
+    background: #f5f6fa;
+    position: relative;
+    height: 100%;
+}
+/* begin filter css */
+.home-filter {
+	display: flex;
+	align-items: center;
+	padding: 12px 22px;
+	border-radius: 2px;
+	background-color: #fff;
+    border: 1px solid #e6e6e6;
+}
+
+.home-filter__label {
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+	margin-right: 16px;
+}
+
+.home-filter__btn {
+	background-color: #F7F7F7;
+	min-width: 90px;
+	margin-right: 12px;
+	font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.home-filter__btn--active{
+	background-color: #2c6dd5;
+    color: #fff;
+}
+
+.home-filter__page {
+	display: flex;
+	align-items: center;
+	margin-left: auto; /*Tự động dịch*/
+}
+
+.home-filter__page-num {
+	font-size: 16px;
+	color: black;
+	margin-right: 22px;
+}
+
+.home-filter__page-current {
+	color: #2c6dd5;
+}
+
+.home-filter__page-control {
+	border-radius: 2px;
+	overflow: hidden;
+	display: flex;
+	width: 72px;
+	height: 36px;
+}
+
+.home-filter__page-btn {
+	flex: 1;
+	display: flex;
+	background-color: #2c6dd5;
+	text-decoration: none;
+}
+
+.home-filter__page-btn--disable {
+	cursor: default;
+	background-color: #f9f9f9;
+}
+
+.home-filter__page-btn--disable .home-filter__page-icon {
+	color: #ccc;
+}
+
+.home-filter__page-btn:first-child {
+	border-right: 1px solid #EEE;
+}
+
+.home-filter__page-icon {
+	font-size: 16px;
+	margin: auto;
+	color: #fff;
+}
+
+/* end filter css */
+
+/*adv tag*/
+.home-product-item__favourite {
+    position: absolute;
+    top: 0px;
+    left: 10px;
+    color: #2c6dd5;
+    background-color: currentColor;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.6rem;
+    padding-right: 4px;
+    padding-top: 1px;
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+    /*Tự thêm*/
+}
+
+.home-product-item__favourite::after {
+    /*Tạo nếp gập ở nhãn yêu thích*/
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    border-top: 5px solid currentColor;
+    border-left: 5px solid transparent;
+    filter: brightness(60%);
+    /*Giảm độ sáng của currentColor còn 60%, tức cái gập màu sẽ tối hơn*/
+}
+
+.home-product-item__favourite span {
+    color: #fff;
+    padding-right: 5px;
+}
+
+.home-product-item__favourite i {
+    color: #fff;
+    margin: 0 0 0 5px;
+}
+/*End tag*/
+
+.card-custom, .card-class-custom{
+	border-radius: 0px;
+    border: 1px solid #e6e6e6;
+}
+.card-header{
+	background-color: #e6e6e6;
+}
+.class-title{
+	margin-top: 40px;
+}
+.class-name{
+	display: flex;
+	align-items: center;
+	font-size: 20px;
+	font-weight: 600;
+	margin-bottom: 10px;
+}
+.card-body{
+	font-size: 14px;
+}
+.row-classes{
+	margin: -15px 0 10px 0 ;
+}
+.tutor-image{
+	position: absolute;
+	top: 115px;
+	right: 10px;
+}
+#btnCreate{
+	color: #fff;
+	font-size: 16px;
+	background-color: #2c6dd5;
+	border-radius: 5px;
+	padding: 10px 15px 10px 10px;
+}
+
+/*Modal create new class of tutor*/
+.modal-content{
+	border: 1px solid #e6e6e6;
+	border-radius: 3px;
+}
+.modal-footer{
+	padding: 25px 30px;
+}
+.btn-createClassSubmit{
+	background-color: #2c6dd5;
+	color: #fff;
+	padding: 10px 20px;
+}
+.btn-createClassSubmit:hover{
+	color: #fff;
+}
+/*End Modal create new class of tutor*/
+
+/*dropdown toggle to show action edit and delete*/
+.dropdown-menu{
+	min-width: 8rem;
+}
+/*End dropdown toggle to show action edit and delete*/
