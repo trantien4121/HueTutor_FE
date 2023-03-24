@@ -36,3 +36,17 @@ btnFilterList.forEach(btn => btn.addEventListener("click", (e) => {
     btn.classList.add("home-filter__btn--active");
 }));
 
+//hiển thị các element theo trạng thái
+// function hideElement(statusClassIcon){
+//     var listFilterEle = [];
+//     var listChildFilterEle = document.querySelectorAll('.bi-circle-fill.icon-filter');
+//     listChildFilterEle.forEach(child => {
+//         if(child.classList.contains(statusClassIcon))
+//             listFilterEle.push(child.parentElement.parentElement.parentElement.parentElement);
+//     });
+
+//     return listFilterEle;
+// }
+
+// console.log(hideElement("icon-filter-green"));
+
