@@ -223,109 +223,181 @@
     </main>
 
     <!-- Modal -->
-    <form method="post" id="createNewClass"></form>
-    <div class="modal fade" id="createNewClassForm" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title fs-5" style="margin-top: 12px;" id="exampleModalLabel">Tạo lớp học</h5>
-                    <!-- <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x"
+    <form method="post" id="createNewClass">
+        <div class="modal fade" id="createNewClassForm" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fs-5" style="margin-top: 12px;" id="exampleModalLabel">Tạo lớp học</h5>
+                        <!-- <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x"
                             style="font-size: 24px;"></i></button> -->
-                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="bi bi-x" style="font-size: 24px;"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row gutters">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="subjectName">Môn học</label>
-                                <input type="text" class="form-control" id="subjectName" name="subjectName"
-                                    placeholder="Nhập môn học">
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="tuitionFee">Học phí (tháng)</label>
-                                <input type="text" class="form-control" id="tuitionFee" name="tuitionFee"
-                                    placeholder="Nhập mức học phí">
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="gradeLevel">Lớp</label>
-                                <input type="text" class="form-control" id="gradeLevel" name="gradeLevel"
-                                    placeholder="Nhập lớp">
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="maxStudent">Số học viên tối đa</label>
-                                <input type="number" class="form-control" id="maxStudent" name="maxStudent"
-                                    placeholder="Nhập số học viên">
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="lessonTime">Thời lượng (h/buổi)</label>
-                                <input type="text" class="form-control" id="lessonTime" name="lessonTime"
-                                    placeholder="Nhập thời lượng buổi">
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="isOnline">Hình thức</label><br>
-                                <div class="form-check form-check-inline mt-2 mr-3">
-                                    <input class="form-check-input" type="radio" name="isOnline" id="onlineClass"
-                                        value="true" checked>
-                                    <label class="form-check-label" for="onlineClass">online</label>
-                                </div>
-                                <div class="form-check form-check-inline mt-2">
-                                    <input class="form-check-input" type="radio" name="isOnline" id="offlineClass"
-                                        value="false">
-                                    <label class="form-check-label" for="offlineClass">trực tiếp</label>
+                        <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="bi bi-x" style="font-size: 24px;"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="subjectName">Môn học</label>
+                                    <!-- <input type="text" class="form-control" id="subjectName" name="subjectName"
+                                        placeholder="Nhập môn học"> -->
+                                    <select class="form-select form-control" aria-label="Default select example"
+                                        id="subjectName" name="subjectName">
+                                    </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="startDay">Ngày bắt đầu</label>
-                                <input type="date" class="form-control" id="startDay" name="startDay"
-                                    placeholder="Chọn thời gian bắt đầu">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="tuitionFee">Học phí (vnđ/tháng)</label>
+                                    <input type="text" class="form-control" id="tuitionFee" name="tuitionFee"
+                                        placeholder="Nhập mức học phí">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="endDay">Ngày kết thúc</label>
-                                <input type="date" class="form-control" id="endDay" name="endDay"
-                                    placeholder="Chọn thời gian kết thúc">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="gradeLevel">Lớp</label>
+                                    <input type="number" class="form-control" id="gradeLevel" name="gradeLevel"
+                                        placeholder="Nhập lớp">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="status">Trạng thái</label>
-                                <input type="text" class="form-control" id="status" name="status" value="Đang chờ"
-                                    readonly>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="maxStudent">Số học viên tối đa</label>
+                                    <input type="number" class="form-control" id="maxStudent" name="maxStudent"
+                                        placeholder="Nhập số học viên">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="timeTable">Thời khóa biểu</label>
-                                <input type="text" class="form-control" id="timeTable" name="timeTable"
-                                    placeholder="Nhập thời khóa biểu">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="lessonTime">Thời lượng (h/buổi)</label>
+                                    <input type="text" class="form-control" id="lessonTime" name="lessonTime"
+                                        placeholder="Nhập thời lượng buổi">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="isOnline">Hình thức</label><br>
+                                    <div class="form-check form-check-inline mt-2 mr-3">
+                                        <input class="form-check-input" type="radio" name="isOnline" id="onlineClass"
+                                            value="true" checked>
+                                        <label class="form-check-label" for="onlineClass">online</label>
+                                    </div>
+                                    <div class="form-check form-check-inline mt-2">
+                                        <input class="form-check-input" type="radio" name="isOnline" id="offlineClass"
+                                            value="false">
+                                        <label class="form-check-label" for="offlineClass">trực tiếp</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="startDay">Ngày bắt đầu</label>
+                                    <input type="date" class="form-control" id="startDay" name="startDay"
+                                        placeholder="Chọn thời gian bắt đầu">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="endDay">Ngày kết thúc</label>
+                                    <input type="date" class="form-control" id="endDay" name="endDay"
+                                        placeholder="Chọn thời gian kết thúc">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="status">Trạng thái</label>
+                                    <input type="text" class="form-control" id="status" name="status" value="wait"
+                                        readonly>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="timeTable">Thời khóa biểu</label>
+                                    <input type="text" class="form-control" id="timeTable" name="timeTable"
+                                        placeholder="Nhập thời khóa biểu">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Trở lại</button>
-                    <button type="submit" class="btn btn-createClassSubmit ml-3">Thêm lớp</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Trở lại</button>
+                        <button type="submit" class="btn btn-createClassSubmit ml-3">Thêm lớp</button>
+                    </div>
                 </div>
             </div>
         </div>
+    </form>
+
+
+    <!--Modal Add class success-->
+
+    <!-- Button trigger modal add class success-->
+    <button id="add-class-success" type="button" class="btn btn-primary d-none" data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop">
+        Launch static backdrop modal
+    </button>
+
+    <!-- Modal show Success message when add class-->
+    <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title fs-5 pt-3" id="staticBackdropLabel" style="font-size: 18px;"><i
+                            class="mr-2 bi bi-check-circle" style="color: green;"></i>Thêm lớp thành công!</span>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x"
+                            style="font-size: 24px;"></i></button>
+                </div>
+
+            </div>
+        </div>
     </div>
-    <form action="post" id="createNewClass"></form>
+
+    <!-- Button trigger modal Delete class success-->
+    <button id="delete-class-success" type="button" class="btn btn-primary d-none" data-bs-toggle="modal"
+        data-bs-target="#staticBackdropDel">
+        Launch static backdrop modal
+    </button>
+
+    <!-- Modal show Success message when delete class-->
+    <div class="modal fade" id="staticBackdropDel" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title fs-5 pt-3" id="staticBackdropLabel" style="font-size: 18px;"><i
+                            class="mr-2 bi bi-check-circle" style="color: green;"></i>Xóa lớp thành công!</span>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x"
+                            style="font-size: 24px;"></i></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Button trigger modal Delete class success-->
+    <button id="update-class-success" type="button" class="btn btn-primary d-none" data-bs-toggle="modal"
+        data-bs-target="#staticBackdropUpdate">
+        Launch static backdrop modal
+    </button>
+
+    <!-- Modal show Success message when delete class-->
+    <div class="modal fade" id="staticBackdropUpdate" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title fs-5 pt-3" id="staticBackdropLabel" style="font-size: 18px;"><i
+                            class="mr-2 bi bi-check-circle" style="color: green;"></i>Cập nhật lớp thành công!</span>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x"
+                            style="font-size: 24px;"></i></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <!-- Footer section-->
     <footer>
@@ -414,7 +486,6 @@
 
     <script>
 
-        
     </script>
 </body>
 

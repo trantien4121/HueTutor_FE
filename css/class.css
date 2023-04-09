@@ -214,6 +214,25 @@ footer{
 .btn-createClassSubmit:hover{
 	color: #fff;
 }
+.btn-confirmDelete{
+	background-color: #dc3545;
+	color: #fff;
+	padding: 10px 20px;
+}
+.btn-confirmDelete:hover{
+	background-color: #dc3545;
+	color: #fff;
+}
+.btn-cancelDelete{
+	background-color: #6c757d;
+	color: #fff;
+	padding: 10px 20px;
+}
+.btn-cancelDelete:hover{
+	background-color: #6c757d;
+	color: #fff;
+}
+
 /*End Modal create new class of tutor*/
 
 /*dropdown toggle to show action edit and delete*/

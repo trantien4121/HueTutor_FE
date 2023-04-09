@@ -188,16 +188,16 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
 
                             //Không tìm thấy lớp học nào của gia sư đó
                             if (classInfo.status == "NumOfPages = 0") {
-                            //     const noClassEle = document.createElement("div");
-                            //     noClassEle.setAttribute("Class", "col-6 offset-3 pt-5 mt-5 pb-4 mb-4");
-                            //     noClassEle.innerHTML = `
-                            //     <div class="no-content d-flex justify-content-center">
-                            //         <h4 style="color: #ccc">Không tồn tại lớp dạy nào!</h4>
-                            //     </div>
-                            // `;
-                            //     renderContent.appendChild(noClassEle);
-                            //     mainContent.appendChild(renderContent);
-                            document.querySelector('.class-of-tutor-title').style.display = "none";
+                                //     const noClassEle = document.createElement("div");
+                                //     noClassEle.setAttribute("Class", "col-6 offset-3 pt-5 mt-5 pb-4 mb-4");
+                                //     noClassEle.innerHTML = `
+                                //     <div class="no-content d-flex justify-content-center">
+                                //         <h4 style="color: #ccc">Không tồn tại lớp dạy nào!</h4>
+                                //     </div>
+                                // `;
+                                //     renderContent.appendChild(noClassEle);
+                                //     mainContent.appendChild(renderContent);
+                                document.querySelector('.class-of-tutor-title').style.display = "none";
                             }
                             else {
                                 //Lấy số trang mà Api trả về
@@ -230,9 +230,154 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
                                                     <i class="bi bi-three-dots"></i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">Chỉnh sửa</a></li>
-                                                    <li><a class="dropdown-item" href="#">Xóa</a></li>
+                                                    <li>
+                                                        <a id="btnConfirmDelete" href="" class="dropdown-item"
+                                                            data-bs-toggle="modal" data-bs-target="#updateClassModal${classInfo.data[i].classId}">
+                                                            Chỉnh sửa
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a id="btnConfirmDelete" href="" class="dropdown-item"
+                                                            data-bs-toggle="modal" data-bs-target="#confirmDeleleModal${classInfo.data[i].classId}">
+                                                            Xóa
+                                                        </a>
+                                                    </li>
                                                 </ul>
+                                                
+                                                <!--Modal confirm Delete Class-->
+                                               
+                                                <div class="modal fade" id="confirmDeleleModal${classInfo.data[i].classId}" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title fs-5" style="margin-top: 12px;" id="exampleModalLabel">Thông báo!</h5>
+                                                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                                    <i class="bi bi-x" style="font-size: 24px;"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h5 class="mt-3 mb-3">Bạn có chắc chắn muốn xóa lớp có ID = ${classInfo.data[i].classId} này!</h5>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-cancelDelete" data-bs-dismiss="modal">No</button>
+                                                                <button type="submit" class="btn btn-confirmDelete btn-confirmDelete${classInfo.data[i].classId} ml-2">Yes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- End Of Modal Confirm Delete -->
+
+                                                <!-- Modal Update Class-->
+                                                <form method="post" id="updateClass${classInfo.data[i].classId}">
+                                                <div class="modal fade" id="updateClassModal${classInfo.data[i].classId}" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title fs-5" style="margin-top: 12px;" id="exampleModalLabel">Chỉnh sửa lớp học với ID = ${classInfo.data[i].classId}</h5>
+                                                            <!-- <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x"
+                                                                style="font-size: 24px;"></i></button> -->
+                                                            <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                                <i class="bi bi-x" style="font-size: 24px;"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row gutters">
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="subjectName">Môn học</label>
+                                                                        
+
+                                                                        <input type="text" class="form-control" id="subjectName" name="subjectName" value="${classInfo.data[i].subjectName}"
+                                                                            placeholder="Nhập mức học phí">
+                                                                        
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="tuitionFee">Học phí (vnđ/tháng)</label>
+                                                                        <input type="text" class="form-control" id="tuitionFee" name="tuitionFee" value="${classInfo.data[i].tuitionFee}"
+                                                                            placeholder="Nhập mức học phí">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="gradeLevel">Lớp</label>
+                                                                        <input type="number" class="form-control" id="gradeLevel" name="gradeLevel" value="${classInfo.data[i].gradeLevel}"
+                                                                            placeholder="Nhập lớp">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="maxStudent">Số học viên tối đa</label>
+                                                                        <input type="number" class="form-control" id="maxStudent" name="maxStudent" value = "${classInfo.data[i].maxStudent}"
+                                                                            placeholder="Nhập số học viên">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="lessonTime">Thời lượng (h/buổi)</label>
+                                                                        <input type="text" class="form-control" id="lessonTime" name="lessonTime" value = "${classInfo.data[i].lessonTime}
+                                                                            placeholder="Nhập thời lượng buổi">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="isOnline">Hình thức</label><br>
+                                                                        <div class="form-check form-check-inline mt-2 mr-3">
+                                                                            <input class="form-check-input" type="radio" name="isOnline" id="onlineClass"
+                                                                                value="true"  ${classInfo.data[i].online == true ? "checked" : ""}>
+                                                                            <label class="form-check-label" for="onlineClass">online</label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline mt-2">
+                                                                            <input class="form-check-input" type="radio" name="isOnline" id="offlineClass"
+                                                                                value="false" ${classInfo.data[i].online == false ? "checked" : ""}>
+                                                                            <label class="form-check-label" for="offlineClass">trực tiếp</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="startDay">Ngày bắt đầu</label>
+                                                                        <input type="date" class="form-control" id="startDay" name="startDay" value = "${classInfo.data[i].startDay}"
+                                                                            placeholder="Chọn thời gian bắt đầu">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="endDay">Ngày kết thúc</label>
+                                                                        <input type="date" class="form-control" id="endDay" name="endDay" value = "${classInfo.data[i].endDay}"
+                                                                            placeholder="Chọn thời gian kết thúc">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="status">Trạng thái</label>
+                                                                        <input type="text" class="form-control" id="status" name="status" value="${classInfo.data[i].status}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="timeTable">Thời khóa biểu</label>
+                                                                        <input type="text" class="form-control" id="timeTable" name="timeTable" value = "${classInfo.data[i].timeTable}"
+                                                                            placeholder="Nhập thời khóa biểu">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                                                            <button type="submit" class="btn btn-createClassSubmit ml-3">Update</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </form>
+                                                <!-- End Of Modal Update Class-->
+
                                             </div>
                                         </div>
                                         <div class="class-tutor mb-4">
@@ -266,6 +411,58 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
                                     colReneder.appendChild(tag);
                                     renderContent.appendChild(colReneder);
                                     mainContent.appendChild(renderContent);
+
+                                    //Call delete API
+                                    const deleteClassApi = `http://localhost:8080/api/v1/Classes/${info.data.tutorId}/${classInfo.data[i].classId}`;
+
+                                    var btnDel = document.querySelector(`.btn-confirmDelete${classInfo.data[i].classId}`);
+                                    btnDel.addEventListener("click", async function(){
+                                        
+                    
+                                        const response = await fetch(deleteClassApi, {
+                                            method: 'DELETE',
+                                        });
+                                        if (!response.ok) {
+                                            const message = `An error has accured: ${response.status}`;
+                                            throw new Error(message);
+                                        }
+                                        //console.log(`Delete Class successfully!`);
+                                        const buttnOpenModalDel = document.getElementById("delete-class-success");
+                                        buttnOpenModalDel.click();
+                                        setTimeout(function(){location.reload()}, 1000);
+                    
+                                    });
+
+                                    //Call Put API
+                                    const putClassApi = `http://localhost:8080/api/v1/Classes/${info.data.tutorId}/${classInfo.data[i].classId}`;
+                                    const putForm = document.getElementById(`updateClass${classInfo.data[i].classId}`);
+                                    putForm.addEventListener('submit', async event => {
+                                        event.preventDefault();
+                    
+                                        const formData = new FormData(putForm);
+                                        // formData.set("tuitionFee", formData.get("tuitionFee") + " vnđ / tháng");
+                                        // formData.set("lessonTime", formData.get("lessonTime") + "h/buổi");
+                    
+                                        // var object = {};
+                                        // formData.forEach((value, key) => object[key] = value);
+                                        // var json = JSON.stringify(object);
+                    
+                                        const response = await fetch(putClassApi, {
+                                            method: 'PUT',
+                                            body: formData
+                                        });
+                                        if (!response.ok) {
+                                            const message = `An error has accured: ${response.status}`;
+                                            throw new Error(message);
+                                        }
+                                        const data = await response.json();
+                                        console.log(data);
+                                        //alert('update User successfully');
+                    
+                                        const buttnOpenModal = document.getElementById("update-class-success");
+                                        buttnOpenModal.click();
+                                        setTimeout(function(){location.reload()}, 1000);
+                                    });
                                 }
 
                             }
@@ -288,29 +485,48 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
 
                 //Create new Class if has Role = Tutor
 
-                const putUserTutorApi = `http://localhost:8080/api/v1/Tutors/updateUserAndTutor/${userId}/${info.data.tutorId}`;
-                const form = document.getElementById('update-form');
+                //Render All subject that tutor can teach inssubject select option
+                var subjectSelectEle = document.getElementById('subjectName');
+                var subject = info.data.subject;
+
+                subject.forEach((sub, index) => {
+                    var option = document.createElement("option");
+                    option.text = sub;
+                    option.setAttribute("value", sub);
+                    subjectSelectEle.add(option);
+                });
+
+                //Call Post Api
+
+                const postClassApi = `http://localhost:8080/api/v1/Classes/${info.data.tutorId}/insert`;
+                const form = document.getElementById('createNewClass');
                 form.addEventListener('submit', async event => {
                     event.preventDefault();
 
                     const formData = new FormData(form);
+                    formData.set("tuitionFee", formData.get("tuitionFee") + " vnđ / tháng");
+                    formData.set("lessonTime", formData.get("lessonTime") + "h/buổi");
 
-                    const response = await fetch(putUserTutorApi, {
-                        method: 'PUT',
+                    // var object = {};
+                    // formData.forEach((value, key) => object[key] = value);
+                    // var json = JSON.stringify(object);
+
+                    const response = await fetch(postClassApi, {
+                        method: 'POST',
                         body: formData
                     });
                     if (!response.ok) {
                         const message = `An error has accured: ${response.status}`;
                         throw new Error(message);
-                        console.log(message);
-                        // registerFailedMessage.classList.remove('d-none');
                     }
                     const data = await response.json();
                     console.log(data);
                     //alert('update User successfully');
 
-                    const buttnOpenModal = document.getElementById("update-success");
+                    const buttnOpenModal = document.getElementById("add-class-success");
                     buttnOpenModal.click();
+
+                    // console.log(json);
 
                 });
 
@@ -440,7 +656,7 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
 
                             const mainContent = document.querySelector(".row-classes");
 
-                            
+
                             /* title class of tutor*/
                             const renderTitleContent = document.createElement("div");
                             renderTitleContent.setAttribute("class", "col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-3 class-of-user-title")
@@ -457,16 +673,16 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
 
                             //Không tìm thấy lớp học nào đã đăng ký của người dùng đó đó
                             if (classInfo.status == "NumOfPages = 0") {
-                            //     const noClassEle = document.createElement("div");
-                            //     noClassEle.setAttribute("Class", "col-12 mt-5 mb-5");
-                            //     noClassEle.innerHTML = `
-                            //     <div class="no-content">
-                                    
-                            //         <h4 style="color: #ccc">Không tồn tại lớp học nào của bạn!</h4>
-                            //     </div>
-                            // `;
+                                //     const noClassEle = document.createElement("div");
+                                //     noClassEle.setAttribute("Class", "col-12 mt-5 mb-5");
+                                //     noClassEle.innerHTML = `
+                                //     <div class="no-content">
 
-                            //     mainContent.appendChild(noClassEle);
+                                //         <h4 style="color: #ccc">Không tồn tại lớp học nào của bạn!</h4>
+                                //     </div>
+                                // `;
+
+                                //     mainContent.appendChild(noClassEle);
                                 document.querySelector('.class-of-user-title').style.display = "none";
                             }
                             else {
