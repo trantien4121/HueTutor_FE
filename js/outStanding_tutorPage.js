@@ -87,7 +87,7 @@ function showOutstandingTutors() {
         cardHover__buttonBtn.setAttribute("class", "d-flex justify-content-center");
         
         const cardHover__button = document.createElement("button");
-        cardHover__button.setAttribute("class", "card-tutor-button");
+        cardHover__button.setAttribute("class", `card-tutor-button card-tutor-button-${tutor.tutorId}`);
         cardHover__button.innerText = "Xem các lớp";
 
         cardHover__buttonBtn.appendChild(cardHover__button);
@@ -98,6 +98,11 @@ function showOutstandingTutors() {
         cardHover.appendChild(cardHover__buttonBtn);
 
         colClass.appendChild(cardHover);
+
+        const btnViewTutorCLick = document.querySelector(`.card-tutor-button-${tutor.tutorId}`);
+        btnViewTutorCLick.addEventListener("click", function(){
+            window.location.href = `tutorDescription.html?ID=${tutor.tutorId}`;
+        })
 
         });
     });

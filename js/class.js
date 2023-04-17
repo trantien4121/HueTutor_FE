@@ -231,13 +231,13 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li>
-                                                        <a id="btnConfirmDelete" href="" class="dropdown-item"
+                                                        <a href="" class="dropdown-item"
                                                             data-bs-toggle="modal" data-bs-target="#updateClassModal${classInfo.data[i].classId}">
                                                             Chỉnh sửa
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a id="btnConfirmDelete" href="" class="dropdown-item"
+                                                        <a href="" class="dropdown-item"
                                                             data-bs-toggle="modal" data-bs-target="#confirmDeleleModal${classInfo.data[i].classId}">
                                                             Xóa
                                                         </a>
@@ -390,9 +390,81 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
                                             <span><i class="mr-1 bi bi-clock"></i>Thời gian: ${convertDate(classInfo.data[i].startDay)} -
                                                 ${convertDate(classInfo.data[i].endDay)}</span>
                                         </div>
-                                        <div class="class-numStudent">
-                                            <span><i class="mr-1 bi bi-person"></i>Số lượng học viên: 1/${classInfo.data[i].maxStudent}</span>
-                                        </div>
+                                        <div class="studentInfo d-flex justify-content-between">
+                                            <div class="class-numStudent">
+                                                <span><i class="mr-1 bi bi-person"></i>Số học viên: 1/${classInfo.data[i].maxStudent}</span>
+                                            </div>
+                                            <div class="viewListStudent">
+                                                <a href="" data-bs-toggle="modal" data-bs-target="#viewAllUsersOfClass${classInfo.data[i].classId}">
+                                                    Xem danh sách
+                                                </a>
+
+                                                <!--Modal Show All Users Of Class-->
+                                               
+                                                <div class="modal fade" id="viewAllUsersOfClass${classInfo.data[i].classId}" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title fs-5" style="margin-top: 12px;" id="exampleModalLabel">Danh sách các học viên ID = ${classInfo.data[i].classId}</h5>
+                                                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                                    <i class="bi bi-x" style="font-size: 24px;"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body list-user-of-class${classInfo.data[i].classId}">
+                                                                
+                                                                <!--Render All Users Of this class-->
+                                                                
+                                                                <!-- <ul class="list-user">
+                                                                    <li class="list-user-item">
+                                                                        <div class="list-user-item-info d-flex justify-content-between">
+                                                                            <div class="list-user-item-info__name">
+                                                                                <img src="https://znews-photo.zingcdn.me/w660/Uploaded/qhj_yvobvhfwbv/2018_07_18/Nguyen_Huy_Binh1.jpg" alt="img"
+                                                                                width="50" height="50" class="mr-1 rounded-circle">
+                                                                                <span>Trần Tiến</span>
+                                                                            </div>
+                                                                            <div class="list-user-item-info__day pt-2">
+                                                                              
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="list-user-item">
+                                                                        <div class="list-user-item-info d-flex justify-content-between">
+                                                                            <div class="list-user-item-info__name">
+                                                                                <img src="https://znews-photo.zingcdn.me/w660/Uploaded/qhj_yvobvhfwbv/2018_07_18/Nguyen_Huy_Binh1.jpg" alt="img"
+                                                                                width="50" height="50" class="mr-1 rounded-circle">
+                                                                                <span>Đoàn Quang Thái</span>
+                                                                            </div>
+                                                                            <div class="list-user-item-info__day pt-2">
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="list-user-item">
+                                                                        <div class="list-user-item-info d-flex justify-content-between">
+                                                                            <div class="list-user-item-info__name">
+                                                                                <img src="https://znews-photo.zingcdn.me/w660/Uploaded/qhj_yvobvhfwbv/2018_07_18/Nguyen_Huy_Binh1.jpg" alt="img"
+                                                                                width="50" height="50" class="mr-1 rounded-circle">
+                                                                                <span>Nguyễn Hữu Vinh</span>
+                                                                            </div>
+                                                                            <div class="list-user-item-info__day pt-2">
+                                                                                
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul> -->
+                                                                
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- End Of Modal Show All Users Of Class -->
+
+                                            </div>
+                                        </div>  
+                                        
                                     </div>
                             `;
                                     colReneder.appendChild(cardClass);
@@ -416,9 +488,9 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
                                     const deleteClassApi = `http://localhost:8080/api/v1/Classes/${info.data.tutorId}/${classInfo.data[i].classId}`;
 
                                     var btnDel = document.querySelector(`.btn-confirmDelete${classInfo.data[i].classId}`);
-                                    btnDel.addEventListener("click", async function(){
-                                        
-                    
+                                    btnDel.addEventListener("click", async function () {
+
+
                                         const response = await fetch(deleteClassApi, {
                                             method: 'DELETE',
                                         });
@@ -429,8 +501,8 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
                                         //console.log(`Delete Class successfully!`);
                                         const buttnOpenModalDel = document.getElementById("delete-class-success");
                                         buttnOpenModalDel.click();
-                                        setTimeout(function(){location.reload()}, 1000);
-                    
+                                        setTimeout(function () { location.reload() }, 1000);
+
                                     });
 
                                     //Call Put API
@@ -438,15 +510,9 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
                                     const putForm = document.getElementById(`updateClass${classInfo.data[i].classId}`);
                                     putForm.addEventListener('submit', async event => {
                                         event.preventDefault();
-                    
+
                                         const formData = new FormData(putForm);
-                                        // formData.set("tuitionFee", formData.get("tuitionFee") + " vnđ / tháng");
-                                        // formData.set("lessonTime", formData.get("lessonTime") + "h/buổi");
-                    
-                                        // var object = {};
-                                        // formData.forEach((value, key) => object[key] = value);
-                                        // var json = JSON.stringify(object);
-                    
+
                                         const response = await fetch(putClassApi, {
                                             method: 'PUT',
                                             body: formData
@@ -458,11 +524,59 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
                                         const data = await response.json();
                                         console.log(data);
                                         //alert('update User successfully');
-                    
+
                                         const buttnOpenModal = document.getElementById("update-class-success");
                                         buttnOpenModal.click();
-                                        setTimeout(function(){location.reload()}, 1000);
+                                        setTimeout(function () { location.reload() }, 1000);
                                     });
+
+                                    //Call Show List Users Of Class APi
+                                    const classId = classInfo.data[i].classId;
+                                    const lstUserApi = `http://localhost:8080/api/v1/ClassTeaches/getAllUsers/${classInfo.data[i].classId}`;
+                                    fetch(lstUserApi)
+                                        .then(response => response.json())
+                                        .then(lstInfo => {
+                                            console.log(lstInfo);
+
+                                            const LstUserEle = document.querySelector(`.list-user-of-class${lstInfo[0].cla.classId}`);
+                                            console.log(LstUserEle);
+
+                                            const ulEle = document.createElement("ul");
+                                            ulEle.setAttribute("class", "list-user");
+
+                                            for (var i = 0; i < lstInfo.length; i++) {
+                                                var liEle = document.createElement("li");
+                                                liEle.setAttribute("class", "list-user-item");
+
+                                                liEle.innerHTML = `
+                                                    <div class="list-user-item-info d-flex justify-content-between">
+                                                        <div class="list-user-item-info__name">
+                                                            <img src="http://localhost:8080/api/v1/Users/image/${lstInfo[i].user.userId}" alt="img"
+                                                            width="50" height="50" class="mr-1 rounded-circle">
+                                                            <span>${lstInfo[i].user.fullName}</span>
+                                                        </div>
+                                                        <div class="list-user-item-info__day pt-2">
+
+                                                        </div>
+                                                    </div>
+                                                    `;
+                                                ulEle.appendChild(liEle);
+                                            }
+                                            LstUserEle.appendChild(ulEle);
+                                        })
+                                        .catch(error => {
+                                            console.log(error)
+                                            console.log("CHƯA CÓ HỌC VIÊN NÀO ĐĂNG KÝ!");
+
+                                            const lstNoContentEle = document.querySelector(`.list-user-of-class${classId}`);
+                                            console.log(lstNoContentEle);
+
+                                            const noContentEle = document.createElement("h6");
+                                            noContentEle.innerHTML = "Chưa có học viên nào đăng ký!";
+
+                                            lstNoContentEle.appendChild(noContentEle);
+                                        });
+
                                 }
 
                             }

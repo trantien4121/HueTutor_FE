@@ -240,3 +240,18 @@ footer{
 	min-width: 8rem;
 }
 /*End dropdown toggle to show action edit and delete*/
+
+/*Modal show list Users Of class*/
+ul.list-user{
+	list-style: none;
+	margin-left: -40px;
+}
+li.list-user-item{
+	margin-top: 20px;
+}
+li.list-user-item:first-child{
+	margin-top:10px;
+}
+.list-user-item-info__day{
+	margin-top: 5px;
+}
