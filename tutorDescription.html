@@ -12,11 +12,22 @@
 
     <link rel="stylesheet" href="css/owl.carousel.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Boostrap icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    <!--Sẽ có hiệu ứng ở comment như lỗi ở navbar-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+        integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Style -->
     <link rel="stylesheet" href="css/style.css">
 
@@ -27,6 +38,8 @@
     <link rel="stylesheet" href="css/userProfile.css">
 
     <link rel="stylesheet" href="css/blog.css">
+
+    <link rel="stylesheet" href="css/tutorDesction.css">
 
     <!--Lấy plugin của fanpage-->
     <div id="fb-root"></div>
@@ -158,16 +171,15 @@
                         </div>
                         <div class="progress" role="progressbar" aria-label="Example 2px high" aria-valuenow="25"
                             aria-valuemin="0" aria-valuemax="100" style="height: 2px">
-                        <div class="progress-bar" style="width: 12%"></div>
+                            <div class="progress-bar" style="width: 12%"></div>
                         </div>
                         <div class="card-body">
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
     <!-- Footer section-->
@@ -302,7 +314,31 @@
 
     </script>
 
+    <!--Rating function-->
+    <script>
+        var count = 0;
 
+        function startRating(item) {
+            count = item.id[0];
+            sessionStorage.star = count;
+            for (var i = 0; i < 5; i++) {
+                if (i < count) {
+                    document.getElementById((i + 1)).style.color = "gold";
+                }
+                else {
+                    document.getElementById((i + 1)).style.color = "grey"
+                }
+            }
+        }
+        function result() {
+            if (count != 0) {
+                document.getElementById('result').innerHTML =
+                    "<h4>Rating: " + count + "</h4>"
+                    + "<h4>Review</h4>"
+                    + "<p>" + document.getElementById("review").value + "</p>";
+            }
+        }
+    </script>
 </body>
 
 </html>

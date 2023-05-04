@@ -1,0 +1,100 @@
+/*Mới thêm*/
+body::before {
+  background: none;
+}
+
+.rating-stars {
+  display: flex;
+}
+
+.rating-stars .star {
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.rating-stars .star:last-child {
+  margin-right: 0;
+}
+
+.rating-stars .star:hover,
+.rating-stars .star.active {
+  color: gold;
+}
+
+/* .form-control {
+  padding-top: 20px;
+  color: red;
+} */
+
+/* .form-floating>label {
+  position: absolute;
+  top: 715px;
+  left: 80px;
+  height: 100%;
+  opacity: .65;
+  padding: 1rem .5rem;
+  pointer-events: none;
+  background-color: #fff;
+  transform-origin: 0 0;
+  transition: opacity .1s ease-in-out, transform .1s ease-in-out;
+  height: 50px;
+  margin-top: 19px;
+  margin-left: 10px;
+}
+
+.form-control:focus {
+  border: 2px solid #2c6dd5;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label,
+.form-floating>.form-select~label {
+  font-size: 16px;
+  color: #2c6dd5;
+  opacity: 1;
+  transform: scale(.85) translateY(-2.6rem) translateX(.15rem);
+} */
+.comment-box{
+  position: relative;
+  width: 100%;    
+  height: 100px;
+}
+textarea{
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+label{
+  position: absolute;
+  font-size: 14px;
+  color: #535353;
+  user-select: text;
+  top: 34%;
+  left: 15px;
+  transition: all .1s linear;  
+}
+textarea:focus{
+  border: 1px solid #2c6dd5;
+}
+textarea:focus ~ label,
+textarea:not(:placeholder-shown) ~ label{
+  top: -15px;
+  font-size: 14px;
+  color: #2c6dd5;
+  background-color: #fff;
+  padding: 0 5px;
+}
+textarea:not(:placeholder-shown) ~ label{
+  top: -15px;
+  font-size: 14px;
+  color: #2c6dd5;
+  background-color: #fff;
+  padding: 0 5px;
+}
+

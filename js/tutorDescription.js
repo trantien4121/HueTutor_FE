@@ -3,7 +3,7 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const tutorId = urlParams.get('ID');
 
-function convertDate(day){
+function convertDate(day) {
     const d = new Date(day);
     const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thusday", "Friday", "Sartuday"];
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -35,11 +35,11 @@ const tutorInfo = fetch(tutorApi)
                                 <h5 class="user-name">${tutor.data.user.fullName}</h5>
                                 <h6 class="user-email mt-3"><i class="mr-1 bi bi-envelope"></i>${tutor.data.user.email}</h6>
                                 <h6 class="user-email mt-3"><i class="mr-1 bi bi-telephone"></i>${tutor.data.user.phoneNumber}</h6>
-                                <h6 class="like-tutor mt-3"><i class="bi bi-hand-thumbs-up"></i> Like numbers: ${tutor.data.likeNumber}
+                                <h6 class="like-tutor mt-3" id="like-tutor"><i class="bi bi-hand-thumbs-up"></i> Like numbers: ${tutor.data.likeNumber}
                                 </h6>
 
                                 <div class="action-button d-flex justify-content-center mt-4">
-                                    <button type="button" class="btn" style="font-size:14px; background-color: #2c6dd5; color:#fff">
+                                    <button type="button" class="btn btn-like-tutor-${tutor.data.tutorId}" style="font-size:14px; background-color: #2c6dd5; color:#fff">
                                         <i class="mr-1 bi bi-hand-thumbs-up"></i>like
                                     </button>
                                 </div>
@@ -115,22 +115,22 @@ const tutorInfo = fetch(tutorApi)
             .then(response => response.json())
             .then(rateInfo => {
                 const totalRate = document.querySelector('.totalRate');
-                totalRate.innerText = `Đáng giá (${rateInfo.length})`;
+                totalRate.innerText = `Đánh giá (${rateInfo.length})`;
 
                 for (var i = 0; i < rateInfo.length; i++) {
                     const listRateEle = document.createElement("div");
                     listRateEle.setAttribute("class", "list-rates mt-3");
 
-                    function renderStar(numStar){
+                    function renderStar(numStar) {
                         var st = "";
-                        for(var i=0; i<numStar; i++){
+                        for (var i = 0; i < numStar; i++) {
                             st = st + '<i class="bi bi-star-fill"></i>';
                         }
                         return st;
                     }
 
-                    listRateEle.innerHTML = 
-                    `
+                    listRateEle.innerHTML =
+                        `
                     <div class="rate-item-info d-flex justify-content-between">
                         <div class="rate-item-info__name"">
                             <img src="http://localhost:8080/api/v1/Users/image/${rateInfo[i].user.userId}" alt="img"
@@ -150,8 +150,71 @@ const tutorInfo = fetch(tutorApi)
                     `;
                     listRateSection.appendChild(listRateEle);
                 };
+
+                const accessToken = localStorage.getItem('accessToken');
+                const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/${accessToken}`)
+                    .then(response => {
+                        return response.json();
+                    })
+                    .then(user => {
+                        const addCmtEle = document.querySelector('div');
+                        addCmtEle.setAttribute("class", "add-new-comment");
+                        addCmtEle.innerHTML = `
+                        <div class="rate-item-info d-flex mt-4">
+                            <div class="rate-item-info__name"">
+                                <img src="http://localhost:8080/api/v1/Users/image/${user.data.userId}" alt="img"
+                                    width="40" height="40" class="mr-1 mt-3 rounded-circle">
+                                <span class="ml-2" style="font-weight: 500; font-size: 16px">Thêm đánh giá</span>
+
+                            </div>
+                        </div>
+                        <div class="rate-item-content ml-5 pl-2" style="font-size: 14px; line-height:2rem; margin-top: -10px">
+                            <form id="user${user.data.userId}-add-for-tutor${tutorId}" method="POST">
+                                <div class="star-rating mb-4">
+                                    <span id="1" style="font-size:16px; color: grey ;cursor:pointer;" class="fa fa-star" onmouseover="startRating(this)" startRating="starmark(this)" ></span>
+                                    <span id="2" style="font-size:16px; color: grey ;cursor:pointer;" class="fa fa-star" onmouseover="startRating(this)" startRating="starmark(this)"></span>
+                                    <span id="3" style="font-size:16px; color: grey ;cursor:pointer;" class="fa fa-star" onmouseover="startRating(this)" startRating="starmark(this)"></span>
+                                    <span id="4" style="font-size:16px; color: grey ;cursor:pointer;" class="fa fa-star" onmouseover="startRating(this)" startRating="starmark(this)"></span>
+                                    <span id="5" style="font-size:16px; color: grey ;cursor:pointer;" class="fa fa-star" onmouseover="startRating(this)" startRating="starmark(this)"></span>
+                                </div>
+                                <div class="comment-box">
+                                    <textarea type="text" placeholder="" id="review"></textarea>
+                                    <label for="review" class="label">Viết gì đó về gia sư này?</label>
+                                </div>
+
+                                <div class="d-flex justify-content-start mt-4 mb-2">
+                                    <button type="button" class="btn" onclick="result()" style="color: #fff; background-color: #2c6dd5; padding: 10px 20px;">
+                                        Gửi <i class="bi bi-send"></i>
+                                    </button>
+                                </div>
+                            </form>
+
+                            
+			
+			<div id="result"></div>
+                       
+                        </div>
+                        `;
+                        listRateSection.appendChild(addCmtEle);
+                    })
+                    .catch(error => console.log(error));
             })
             .catch(error => console.log(error));
+
+        const likeBtn = document.querySelector(`.btn-like-tutor-${tutor.data.tutorId}`);
+        likeBtn.addEventListener("click", async function () {
+            const increaseLikeApi = `http://localhost:8080/api/v1/Tutors/increaseLikeNumber/${tutor.data.tutorId}`;
+            const response = await fetch(increaseLikeApi, {
+                method: 'PUT',
+            });
+            if (!response.ok) {
+                const message = `An error has accured: ${response.status}`;
+                throw new Error(message);
+                // registerFailedMessage.classList.remove('d-none');
+            }
+            const data = await response.json();
+            document.getElementById("like-tutor").innerHTML = `<i class="bi bi-hand-thumbs-up"></i> Like numbers: ${data.data.likeNumber}`;
+        });
 
     })
     .catch(error => console.log(error));

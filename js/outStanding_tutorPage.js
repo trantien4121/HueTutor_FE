@@ -88,7 +88,7 @@ function showOutstandingTutors() {
         
         const cardHover__button = document.createElement("button");
         cardHover__button.setAttribute("class", `card-tutor-button card-tutor-button-${tutor.tutorId}`);
-        cardHover__button.innerText = "Xem các lớp";
+        cardHover__button.innerText = "Xem chi tiết";
 
         cardHover__buttonBtn.appendChild(cardHover__button);
 
