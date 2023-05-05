@@ -332,10 +332,49 @@
         }
         function result() {
             if (count != 0) {
-                document.getElementById('result').innerHTML =
-                    "<h4>Rating: " + count + "</h4>"
-                    + "<h4>Review</h4>"
-                    + "<p>" + document.getElementById("review").value + "</p>";
+                // document.getElementById('result').innerHTML =
+                //     "<h4>Rating: " + count + "</h4>"
+                //     + "<h4>Review</h4>"
+                //     + "<p>" + document.getElementById("review").value + "</p>";
+
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                const tutorId = urlParams.get('ID');
+
+                const accessToken = localStorage.getItem('accessToken');
+                const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/${accessToken}`)
+                    .then(response => response.json())
+                    .then(user => {
+                        var userIdRated = user.data.userId;
+
+                        async function postJSON(data) {
+                            try {
+                                const response = await fetch(`http://localhost:8080/api/v1/Rates/${userIdRated}/insertRateJson/${tutorId}`, {
+                                    method: "POST", // or 'PUT'
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    body: JSON.stringify(data),
+                                });
+
+                                const result = await response.json();
+                                
+                                console.log("Success:", result);
+                                setTimeout(function () { location.reload() }, 1000);
+                            } catch (error) {
+                                console.error("Error:", error);
+                            }
+                        }
+
+                        const data = {
+                            rateContent: `${document.getElementById("review").value}`,
+                            numStarOfRate: count
+                        };
+                        postJSON(data);
+
+                        // alert("số sao: " + count + "--" + "userId: " +
+                        //     userIdRated + "--" + "tutorId: " + tutorId)
+                    })
             }
         }
     </script>
