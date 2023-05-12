@@ -392,7 +392,7 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
                                         </div>
                                         <div class="studentInfo d-flex justify-content-between">
                                             <div class="class-numStudent">
-                                                <span><i class="mr-1 bi bi-person"></i>Số học viên: 1/${classInfo.data[i].maxStudent}</span>
+                                                <span><i class="mr-1 bi bi-person"></i><span class="numstudent-with-class-${classInfo.data[i].classId}">0</span>/${classInfo.data[i].maxStudent}</span>
                                             </div>
                                             <div class="viewListStudent">
                                                 <a href="" data-bs-toggle="modal" data-bs-target="#viewAllUsersOfClass${classInfo.data[i].classId}">
@@ -545,6 +545,9 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
                                             ulEle.setAttribute("class", "list-user");
 
                                             for (var i = 0; i < lstInfo.length; i++) {
+
+                                                document.querySelector(`.numstudent-with-class-${lstInfo[i].cla.classId}`).innerText = `${lstInfo.length}`
+
                                                 var liEle = document.createElement("li");
                                                 liEle.setAttribute("class", "list-user-item");
 
@@ -850,7 +853,7 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
                                                 ${convertDate(classInfo.data[i].cla.endDay)}</span>
                                         </div>
                                         <div class="class-numStudent mb-3">
-                                            <span><i class="mr-1 bi bi-person"></i>Số lượng học viên: 1/${classInfo.data[i].cla.maxStudent}</span>
+                                            <span><i class="mr-1 bi bi-person"></i>Số lượng học viên: <span class="numstudent-with-class-${classInfo.data[i].cla.classId}">0</span>/${classInfo.data[i].cla.maxStudent}</span>
                                         </div>
                                         <div class="class-registeredDay">
                                             <span><i class="mr-1 bi bi-clock"></i>Ngày đăng ký: ${convertDate(classInfo.data[i].registeredDay)}</span>
@@ -874,6 +877,20 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
                                     // mainContent.appendChild(colReneder);
                                     renderContent.appendChild(colReneder);
                                     mainContent.appendChild(renderContent);
+
+                                    const lstUserApi = `http://localhost:8080/api/v1/ClassTeaches/getAllUsers/${classInfo.data[i].cla.classId}`;
+                                    fetch(lstUserApi)
+                                        .then(response => response.json())
+                                        .then(lstInfo => {
+
+                                            for (var i = 0; i < lstInfo.length; i++) {
+                                                document.querySelector(`.numstudent-with-class-${lstInfo[i].cla.classId}`).innerText = `${lstInfo.length}`;
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.log(error);
+                                        });
+
                                 }
 
                             }

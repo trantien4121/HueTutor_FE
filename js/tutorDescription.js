@@ -52,8 +52,8 @@ const tutorInfo = fetch(tutorApi)
                 <div class="card card-custom">
                     <div class="card-header mb-2 mt-2 d-flex justify-content-between">
                         <span style="font-size: 16px; line-height: 2.6rem;">Thông tin gia sư</span>
-                        <button type="button" class="btn btn-primary" style="font-size: 16px;  background-color: #2c6dd5; color:#fff">
-                            Đăng ký học <i class="bi bi-box-arrow-in-right"></i>
+                        <button type="button" class="btn btn-primary btn-view-class-of-tutorr-${tutor.data.tutorId}" style="font-size: 16px;  background-color: #2c6dd5; color:#fff">
+                            Xem các lớp <i class="bi bi-box-arrow-in-right"></i>
                         </button>
                     </div>
                     <div class="progress" role="progressbar" aria-label="Example 2px high" aria-valuenow="25"
@@ -213,6 +213,13 @@ const tutorInfo = fetch(tutorApi)
             const data = await response.json();
             document.getElementById("like-tutor").innerHTML = `<i class="bi bi-hand-thumbs-up"></i> Like numbers: ${data.data.likeNumber}`;
         });
+
+        const viewClassbtn = document.querySelector(`.btn-view-class-of-tutorr-${tutor.data.tutorId}`);
+        viewClassbtn.addEventListener("click", (e) =>{
+            e.preventDefault();
+            //alert("show class of tutor with Id = " + tutor.data.tutorId);
+            window.location.href = `classOfTutor.html?ID=${tutor.data.tutorId}`;
+        })
 
     })
     .catch(error => console.log(error));
