@@ -202,7 +202,7 @@ const tutorInfo = fetch(tutorApi)
         const likeBtn = document.querySelector(`.btn-like-tutor-${tutor.data.tutorId}`);
         likeBtn.addEventListener("click", async function () {
             const increaseLikeApi = `http://localhost:8080/api/v1/Tutors/increaseLikeNumber/${tutor.data.tutorId}`;
-            const response = await fetch(increaseLikeApi, {
+            const response = await fetch(increaseLikeApi, { 
                 method: 'PUT',
             });
             if (!response.ok) {

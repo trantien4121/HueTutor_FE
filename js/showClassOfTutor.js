@@ -201,13 +201,13 @@ function callApi(api) {
                                     <li>
                                         <a href="" class="dropdown-item"
                                             data-bs-toggle="modal" data-bs-target="#updateClassModal${classInfo.data[i].classId}">
-                                            Chỉnh sửa
+                                            Đăng ký học
                                         </a>
                                     </li>
                                     <li>
                                         <a href="" class="dropdown-item"
                                             data-bs-toggle="modal" data-bs-target="#confirmDeleleModal${classInfo.data[i].classId}">
-                                            Xóa
+                                            Hủy đăng ký
                                         </a>
                                     </li>
                                 </ul>
