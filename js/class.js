@@ -835,7 +835,9 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
                                                     <i class="bi bi-three-dots"></i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">Rời khỏi</a></li>
+                                                    <button type="button" class="btn btn-cancel-register-${classInfo.data[i].cla.classId}" style="font-size:14px; margin-left: 10px">
+                                                        Hủy đăng ký
+                                                    </button>
                                                 </ul>
                                             </div>
                                         </div>
@@ -877,6 +879,24 @@ const userInfo = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/$
                                     // mainContent.appendChild(colReneder);
                                     renderContent.appendChild(colReneder);
                                     mainContent.appendChild(renderContent);
+
+                                    const eachClassId = classInfo.data[i].cla.classId;
+                                    //Cancel Registered function
+                                    const btnCancelRegister = document.querySelector(`.btn-cancel-register-${eachClassId}`);
+                                    btnCancelRegister.addEventListener("click", async function () {
+                                        const cancelRegisterToClass = `http://localhost:8080/api/v1/ClassTeaches/${userId}/deleteUserToClass/${eachClassId}`;
+                                        const response = await fetch(cancelRegisterToClass, {
+                                            method: 'DELETE',
+                                        });
+                                        if (!response.ok) {
+                                            const message = `An error has accured: ${response.status}`;
+                                            throw new Error(message);
+                                            // registerFailedMessage.classList.remove('d-none');
+                                        }
+                                        const data = await response.json();
+                                        alert("Hủy đănh ký lớp học thành công!");
+                                        setTimeout(function () { location.reload() }, 1000);
+                                    });
 
                                     const lstUserApi = `http://localhost:8080/api/v1/ClassTeaches/getAllUsers/${classInfo.data[i].cla.classId}`;
                                     fetch(lstUserApi)

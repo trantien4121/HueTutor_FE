@@ -222,9 +222,8 @@
           </div>
         </div>
       </div>
-
       <div class="home-filter__page d-flex justify-content-center">
-        <div class="home-filter__page-control home-filter__page-control--result">
+        <div class="home-filter__page-control-blog home-filter__page-control--result">
 
         </div>
       </div>
@@ -760,10 +759,6 @@
           nextPageLink.appendChild(nextPageIcon);
           pageControlElement.appendChild(nextPageLink);
 
-          for (var i = 1; i <= totalPage; i++) {
-
-          }
-
           //Xử lý các button phân trang
           pagination(currentPage, totalPage, searchValue, filterValue);
 
@@ -877,7 +872,7 @@
           var totalPageStr = blogData.totalPages;
           const totalPage = Number(totalPageStr);
 
-          var pageControlElement = document.querySelector('.home-filter__page-control');
+          var pageControlElement = document.querySelector('.home-filter__page-control-blog');
 
           var prePageLink = document.createElement('a');
           prePageLink.classList.add('home-filter__page-btn-search', 'home-filter-prePage', 'page-link');
@@ -885,6 +880,9 @@
           prePageIcon.classList.add('home-filter__page-icon', 'fa-solid', 'fa-angle-left');
           prePageLink.appendChild(prePageIcon);
           pageControlElement.appendChild(prePageLink);
+
+          const row = document.querySelector('.row-blog');
+          console.log(row);
 
           for (var i = 1; i <= totalPage; i++) {
             var pageLink = document.createElement('a');
@@ -910,7 +908,6 @@
           //Xử lý các button phân trang
           pagination(currentPage, totalPage, searchValue, filterValue);
 
-          const row = document.querySelector('.row-blog');
           for (var i = 0; i < blogData.data.length; i++) {
             const colClass = document.createElement("div");
             colClass.setAttribute("class", "col-lg-4 col-md-12 col-sm-12");
@@ -932,7 +929,7 @@
             <div class="mt-1 d-flex" style="font-size: 12px; color: #aaaaaa">
                 <div class="author">
                     <i class="bi bi-person"></i>
-                    <span>${blogData.data[i].fullName}</span>
+                    <span>${blogData.data[i].user.fullName}</span>
                 </div>
                 <div class="posted-day ml-3">
                     <i class="bi bi-clock"></i>

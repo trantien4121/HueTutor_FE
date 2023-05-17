@@ -199,16 +199,9 @@ function callApi(api) {
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="" class="dropdown-item"
-                                            data-bs-toggle="modal" data-bs-target="#updateClassModal${classInfo.data[i].classId}">
-                                            Đăng ký học
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="" class="dropdown-item"
-                                            data-bs-toggle="modal" data-bs-target="#confirmDeleleModal${classInfo.data[i].classId}">
-                                            Hủy đăng ký
-                                        </a>
+                                        <button type="button" class="btn btn-register-${classInfo.data[i].classId}" style="font-size:14px; margin-left: 26px">
+                                            Đăng ký
+                                        </button>
                                     </li>
                                 </ul>
                                 
@@ -283,7 +276,30 @@ function callApi(api) {
                     renderContent.appendChild(colReneder);
                     mainContent.appendChild(renderContent);
 
-
+                    const eachClassId = classInfo.data[i].classId;
+                    const accessToken = localStorage.getItem('accessToken');
+                    const userId = fetch(`http://localhost:8080/api/v1/auth/getUserByAccessToken/${accessToken}`)
+                        .then(response => response.json())
+                        .then(info => {
+                            const btnRegister = document.querySelector(`.btn-register-${eachClassId}`);
+                            btnRegister.addEventListener("click", async function () {
+                                const registerToClass = `http://localhost:8080/api/v1/ClassTeaches/${info.data.userId}/insertUserToClass/${eachClassId}`;
+                                const response = await fetch(registerToClass, {
+                                    method: 'POST',
+                                });
+                                if (!response.ok) {
+                                    const message = `An error has accured: ${response.status}`;
+                                    throw new Error(message);
+                                    // registerFailedMessage.classList.remove('d-none');
+                                }
+                                const data = await response.json();
+                                setTimeout(function () { location.reload() }, 1000);
+                            });
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            document.querySelector(`.btn-register-${eachClassId}`).parentElement.parentElement.style.display = "none";
+                        });
 
                     //Call Show List Users Of Class APi
                     const classId = classInfo.data[i].classId;
