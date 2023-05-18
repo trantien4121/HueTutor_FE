@@ -53,7 +53,7 @@ if (checkLoginStatus()) {
         <ul class="dropdown arrow-top">
           <li><a href="userProfile.html" class="nav-link"><i class="mr-2 bi bi-info-circle"></i>Quản lý thông tin</a></li>
           <li><a href="class.html" class="nav-link"><i class="mr-2 bi bi-clipboard-check"></i>Lớp học</a></li>
-          <li><a href="timeTable.html" class="nav-link"><i class="mr-2 bi bi-calendar-day"></i>Thời khóa biểu</a></li>
+          <li><a href="changePassword.html" class="nav-link"><i class=" mr-2 bi bi-key"></i>Đổi mật khẩu</a></li>
           <li><a href="" id="logoutBtn" class="nav-link"><i class="mr-2 bi bi-box-arrow-right"></i>Đăng xuất</a></li>
         </ul>
       </li>`;
@@ -66,7 +66,7 @@ if (checkLoginStatus()) {
         <ul class="dropdown arrow-top">
           <li><a href="userProfile.html" class="nav-link"><i class="mr-2 bi bi-info-circle"></i>Quản lý thông tin</a></li>
           <li><a href="class.html" class="nav-link"><i class="mr-2 bi bi-clipboard-check"></i>Lớp học</a></li>
-          <li><a href="timeTable.html" class="nav-link"><i class="mr-2 bi bi-calendar-day"></i>Thời khóa biểu</a></li>
+          <li><a href="changePassword.html" class="nav-link"><i class=" mr-2 bi bi-key"></i>Đổi mật khẩu</a></li>
           <li><a href="" id="logoutBtn" class="nav-link"><i class="mr-2 bi bi-box-arrow-right"></i>Đăng xuất</a></li>
         </ul>
       </li>`;

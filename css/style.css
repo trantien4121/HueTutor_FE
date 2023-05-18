@@ -693,7 +693,7 @@ animation: ring 1.5s infinite;
   font-size: 16px;
   font-weight: 500;
 }
-.active{
+.btn-active{
   background-color: #2c6dd5;
   color: #fff !important;
 }
