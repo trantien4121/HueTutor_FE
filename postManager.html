@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.0/dist/chart.umd.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- fontawaresome cdn-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    <title>Admin</title>
+</head>
+<style>
+    .nav-link {
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .nav-link:hover {
+        color: #2c6dd5;
+        font-weight: 500;
+    }
+
+    .active-menu {
+        color: #2c6dd5;
+        font-weight: 500;
+    }
+
+    body {
+        color: #566787;
+        background: #f5f5f5;
+    }
+
+    /* .table-responsive {
+        margin: 10px 0;
+    } */
+
+    .table-wrapper {
+        background: #fff;
+        padding: 20px 25px;
+        border-radius: 3px;
+        min-width: 1000px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    }
+
+    .table-title {
+        padding-bottom: 15px;
+        background: #435d7d;
+        color: #fff;
+        padding: 16px 30px;
+        min-width: 100%;
+        margin: -20px -25px 10px;
+        border-radius: 3px 3px 0 0;
+    }
+
+    .table-title h2 {
+        margin: 5px 0 0;
+        font-size: 24px;
+    }
+
+    .table-title .btn-group {
+        float: right;
+    }
+
+    .table-title .btn {
+        color: #fff;
+        float: right;
+        font-size: 13px;
+        border: none;
+        min-width: 50px;
+        border-radius: 2px;
+        border: none;
+        outline: none !important;
+        margin-left: 10px;
+    }
+
+    .table-title .btn i {
+        float: left;
+        font-size: 21px;
+        margin-right: 5px;
+    }
+
+    .table-title .btn span {
+        float: left;
+        margin-top: 2px;
+    }
+
+    table.table tr th,
+    table.table tr td {
+        border-color: #e9e9e9;
+        padding: 12px 15px;
+        vertical-align: middle;
+    }
+
+    table.table tr th:first-child {
+        width: 60px;
+    }
+
+    table.table tr th:last-child {
+        width: 100px;
+    }
+
+    table.table-striped tbody tr:nth-of-type(odd) {
+        background-color: #fcfcfc;
+    }
+
+    table.table-striped.table-hover tbody tr:hover {
+        background: #f5f5f5;
+    }
+
+    table.table th i {
+        font-size: 13px;
+        margin: 0 5px;
+        cursor: pointer;
+    }
+
+    table.table td:last-child i {
+        opacity: 0.9;
+        font-size: 22px;
+        margin: 0 5px;
+    }
+
+    table.table td a {
+        font-weight: bold;
+        color: #566787;
+        display: inline-block;
+        text-decoration: none;
+        outline: none !important;
+    }
+
+    table.table td a:hover {
+        color: #2196F3;
+    }
+
+    table.table td a.edit {
+        color: #FFC107;
+    }
+
+    table.table td a.delete {
+        color: #F44336;
+    }
+
+    table.table td i {
+        font-size: 19px;
+    }
+
+    table.table .avatar {
+        border-radius: 50%;
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+
+    .pagination {
+        float: right;
+        margin: 0 0 5px;
+    }
+
+    .pagination li a {
+        border: none;
+        font-size: 13px;
+        min-width: 30px;
+        min-height: 30px;
+        color: #999;
+        margin: 0 2px;
+        line-height: 30px;
+        border-radius: 2px !important;
+        text-align: center;
+        padding: 0 6px;
+    }
+
+    .pagination li a:hover {
+        color: #666;
+    }
+
+    .pagination li.active a,
+    .pagination li.active a.page-link {
+        background: #03A9F4;
+    }
+
+    .pagination li.active a:hover {
+        background: #0397d6;
+    }
+
+    .pagination li.disabled i {
+        color: #ccc;
+    }
+
+    .pagination li i {
+        font-size: 16px;
+        padding-top: 6px
+    }
+
+    .hint-text {
+        float: left;
+        margin-top: 10px;
+        font-size: 13px;
+    }
+
+    /* Custom checkbox */
+    .custom-checkbox {
+        position: relative;
+    }
+
+    .custom-checkbox input[type="checkbox"] {
+        opacity: 0;
+        position: absolute;
+        margin: 5px 0 0 3px;
+        z-index: 9;
+    }
+
+    .custom-checkbox label:before {
+        width: 18px;
+        height: 18px;
+    }
+
+    .custom-checkbox label:before {
+        content: '';
+        margin-right: 10px;
+        display: inline-block;
+        vertical-align: text-top;
+        background: white;
+        border: 1px solid #bbb;
+        border-radius: 2px;
+        box-sizing: border-box;
+        z-index: 2;
+    }
+
+    .custom-checkbox input[type="checkbox"]:checked+label:after {
+        content: '';
+        position: absolute;
+        left: 6px;
+        top: 3px;
+        width: 6px;
+        height: 11px;
+        border: solid #000;
+        border-width: 0 3px 3px 0;
+        transform: inherit;
+        z-index: 3;
+        transform: rotateZ(45deg);
+    }
+
+    .custom-checkbox input[type="checkbox"]:checked+label:before {
+        border-color: #03A9F4;
+        background: #03A9F4;
+    }
+
+    .custom-checkbox input[type="checkbox"]:checked+label:after {
+        border-color: #fff;
+    }
+
+    .custom-checkbox input[type="checkbox"]:disabled+label:before {
+        color: #b8b8b8;
+        cursor: auto;
+        box-shadow: none;
+        background: #ddd;
+    }
+
+    /* Modal styles */
+    .modal .modal-dialog {
+        max-width: 400px;
+    }
+
+    .modal .modal-header,
+    .modal .modal-body,
+    .modal .modal-footer {
+        padding: 20px 30px;
+    }
+
+    .modal .modal-content {
+        border-radius: 3px;
+        font-size: 14px;
+    }
+
+    .modal .modal-footer {
+        background: #ecf0f1;
+        border-radius: 0 0 3px 3px;
+    }
+
+    .modal .modal-title {
+        display: inline-block;
+    }
+
+    .modal .form-control {
+        border-radius: 2px;
+        box-shadow: none;
+        border-color: #dddddd;
+    }
+
+    .modal textarea.form-control {
+        resize: vertical;
+    }
+
+    .modal .btn {
+        border-radius: 2px;
+        min-width: 100px;
+    }
+
+    .modal form label {
+        font-weight: normal;
+    }
+</style>
+
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0" style="background-color: rgb(33, 35, 49);">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-4 pt-2 text-white min-vh-100">
+                    <div class="logo"
+                        style="margin-left: 20px; margin-top: 20px; padding-bottom: 10px; border-bottom: 3px solid #2c6dd5;">
+                        <a href="index.html">
+                            <img srcset="../images/Logo.png 11x" alt="" class="logo">
+                        </a>
+                    </div>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start mt-4"
+                        id="menu">
+                        <li class="nav-item">
+                            <a href="Admin.html" class="nav-link align-middle px-0 nav-link-home"
+                                onclick="setActive(this)">
+                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="userManager.html" class="nav-link px-0 align-middle nav-link-user-manager"
+                                onclick="setActive(this)">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">User Manager</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tutorManager.html" class="nav-link px-0 align-middle nav-link-tutor-manager"
+                                onclick="setActive(this)">
+                                <i class="bi bi-mortarboard" style="font-size: 24px;"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Tutor
+                                    Manager</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="classManager.html" class="nav-link px-0 align-middle nav-link-class-manager"
+                                onclick="setActive(this)">
+                                <i class="bi bi-person-rolodex" style="font-size: 24px;"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Class
+                                    Manager</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="postManager.html" class="nav-link px-0 align-middle nav-link-post-manager"
+                                onclick="setActive(this)">
+                                <i class="bi bi-journal-text" style="font-size: 24px"></i> <span
+                                    class="ms-1 d-none d-sm-inline">Post
+                                    Manager</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="dropdown pb-4">
+                        <!-- <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="${admin.getImage() }" alt="hugenerd" width="30" height="30"
+                                class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1">${admin.getTenDangNhap()}</span>
+                        </a> -->
+                        <a href="#"
+                            class="nav-link login-block d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="mr-2 bi bi-person"></i> Đăng nhập
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col py-3" id="UserManag" style="background-color: #E8E2E2;">
+                <class="row">
+                    <div class="container-xl">
+                        <div class="table-responsive">
+                            <div class="table-wrapper">
+                                <div class="table-title">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <h2>Manage <b>Posts</b></h2>
+                                        </div>
+                                        <div class="col-sm-6 d-flex justify-content-end post-content">
+
+                                            <!-- Button trigger create or join in success-->
+                                            <button id="btnCreate" type="button" class="btn mt-1" data-bs-toggle="modal"
+                                                data-bs-target="#createNewPostForm"
+                                                style="background-color: #2c6dd5; margin-right: 20px;">
+                                                <i class="bi bi-plus"></i>
+                                                <span class="mt-1" style="font-size: 16px; font-weight: 500;">Add
+                                                    new</span>
+                                            </button>
+
+                                            <!-- Modal Create new Post-->
+                                            <form id="createNewPost">
+                                                <div class="modal fade" id="createNewPostForm" data-bs-keyboard="false"
+                                                    tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                                    aria-hidden="true">
+                                                    <div
+                                                        class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                                                        <div class="modal-content" style="color: black">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title fs-5" style="margin-top: 12px;"
+                                                                    id="exampleModalLabel">Thêm bài viết</h5>
+
+                                                                <button type="button" class="btn"
+                                                                    data-bs-dismiss="modal" aria-label="Close">
+                                                                    <i class="bi bi-x"
+                                                                        style="font-size: 24px; color: black; margin-left: 60px;"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row gutters">
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <label for="userId"
+                                                                                style="margin: 10px 0">ID người đăng
+                                                                                bài</label>
+                                                                            <select class="form-select form-control"
+                                                                                aria-label="Default select example"
+                                                                                id="userId" name="userId">
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <label for="title"
+                                                                                style="margin: 10px 0">Tiêu đề</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="title" name="title"
+                                                                                placeholder="Nhập tiêu đề">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <label for="content"
+                                                                                style="margin: 10px 0">Nội dung</label>
+                                                                            <textarea type="text" class="form-control"
+                                                                                id="content" name="content"
+                                                                                placeholder="Nhập nội dung"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <label for="file"
+                                                                                style="margin: 10px 0">Image</label>
+                                                                            <input type="file" class="form-control"
+                                                                                id="file" name="file">
+                                                                            <div class="post-avata mt-2">
+                                                                                <img id="avatar" src="" alt="postImg"
+                                                                                    width="320px" height="200px">
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-cancel"
+                                                                    style="color: black;" data-bs-dismiss="modal">Trở
+                                                                    lại</button>
+                                                                <button type="submit" class="btn btn-createClassSubmit"
+                                                                    style="color: #fff; background-color: #2c6dd5;">
+                                                                    Thêm bài viết
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            <div class="wrap">
+                                                <form class="search" id="search-form">
+                                                    <input type="text" class="searchTerm mt-1 p-2" name="searchValue"
+                                                        id="searchValue" placeholder="Search">
+
+                                                    <button type="submit" class="searchButton btn mt-1 ml-1"
+                                                        value="search" style="background-color: #2c6dd5;">
+                                                        <i class="bi bi-search"></i>
+                                                    </button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="dtHorizontalExample" style="overflow-x:auto !important">
+                                    <table class="table table-striped table-hover" id="myTable">
+                                        <thead>
+                                            <tr>
+                                                <th>PostId</th>
+                                                <th>Author</th>
+                                                <th>Title</th>
+                                                <th>Content</th>
+                                                <th>PostedDay</th>
+                                                <th>Image</th>
+                                                <th>
+                                                    <span style="margin-left: 25px;">Action</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="clearfix">
+                                    <div class="hint-text">Showing <b class="item">5</b> entries</div>
+                                    <ul class="pagination" id="page_container"></ul>
+                                </div>
+
+                                <!--Modal Add post success-->
+
+                                <!-- Button trigger modal add class success-->
+                                <button id="add-post-success" type="button" class="btn btn-primary d-none"
+                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    Launch static backdrop modal
+                                </button>
+
+                                <!-- Modal show Success message when add class-->
+                                <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1"
+                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <span class="modal-title fs-5 pt-1" id="staticBackdropLabel"
+                                                    style="font-size: 18px !important"><i class="bi bi-check-circle"
+                                                        style="color: green; margin-right: 10px;"></i>Thêm bài viết
+                                                    thành công!</span>
+                                                <button type="button" class="btn" data-bs-dismiss="modal"
+                                                    aria-label="Close"><i class="bi bi-x"
+                                                        style="font-size: 24px; margin-left: 50px;"></i></button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Modal Delete post success-->
+
+                                <!-- Button trigger modal add class success-->
+                                <button id="delete-post-success" type="button" class="btn btn-primary d-none"
+                                    data-bs-toggle="modal" data-bs-target="#staticBackdropDelete">
+                                    Launch static backdrop modal
+                                </button>
+
+                                <!-- Modal show Success message when add class-->
+                                <div class="modal fade" id="staticBackdropDelete" data-bs-keyboard="false" tabindex="-1"
+                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <span class="modal-title fs-5 pt-1" id="staticBackdropLabel"
+                                                    style="font-size: 18px !important"><i class="bi bi-check-circle"
+                                                        style="color: green; margin-right: 10px;"></i>Xóa bài viết
+                                                    thành công!</span>
+                                                <button type="button" class="btn" data-bs-dismiss="modal"
+                                                    aria-label="Close"><i class="bi bi-x"
+                                                        style="font-size: 24px; margin-left: 50px;"></i></button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Modal Update post success-->
+
+                                <!-- Button trigger modal add class success-->
+                                <button id="update-post-success" type="button" class="btn btn-primary d-none"
+                                    data-bs-toggle="modal" data-bs-target="#staticBackdropUpdate">
+                                    Launch static backdrop modal
+                                </button>
+
+                                <!-- Modal show Success message when add class-->
+                                <div class="modal fade" id="staticBackdropUpdate" data-bs-keyboard="false" tabindex="-1"
+                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <span class="modal-title fs-5 pt-1" id="staticBackdropLabel"
+                                                    style="font-size: 18px !important"><i class="bi bi-check-circle"
+                                                        style="color: green; margin-right: 10px;"></i>Xóa bài viết
+                                                    thành công!</span>
+                                                <button type="button" class="btn" data-bs-dismiss="modal"
+                                                    aria-label="Close"><i class="bi bi-x"
+                                                        style="font-size: 24px; margin-left: 50px;"></i></button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+    <script>
+
+        //Change image
+        $(document).ready(function () {
+            // Bắt sự kiện khi người dùng chọn file
+            $("#file").change(function () {
+                // Đọc nội dung của file
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    // Hiển thị ảnh lên trang web
+                    $("#avatar").attr("src", e.target.result);
+                };
+                reader.readAsDataURL(this.files[0]);
+            });
+        });
+
+        //Active menu
+        function setActive(link) {
+            // Xóa class active từ tất cả các menu link
+            var links = document.querySelectorAll('.nav-link');
+            for (var i = 0; i < links.length; i++) {
+                links[i].classList.remove('active-menu');
+            }
+
+            // Thêm class active cho menu link được truy cập
+            link.classList.add('active-menu');
+        }
+        const nav_PM = document.querySelector('.nav-link-post-manager');
+        setActive(nav_PM);
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            var pagenum = 1;
+            makecall(pagenum);
+
+            $('#search-form').submit(function (event) {
+                event.preventDefault();
+                pagenum = 1; // Reset page number khi search
+                makecall(pagenum);
+            });
+
+        });
+        function loadData(pagenum) {
+
+            var searchValue = $('#searchValue').val();
+
+            $.ajax({
+                url: `http://localhost:8080/api/v1/Advertisements/searchByValue?`,
+                type: 'GET',
+                dataType: 'json',
+                data:
+                {
+                    searchValue: searchValue,
+                    pageNo: pagenum - 1
+                },
+                success: function (data) {
+                    console.log(data);
+                    // Xóa dữ liệu cũ trong bảng
+                    $("#myTable tbody").empty();
+                    var content = $('.post-content');
+                    // Thêm dữ liệu mới vào bảng
+                    $.each(data.data, function (index, item) {
+
+                        var row = `
+                                <tr>
+                                    <td>${item.advertisementId}</td>
+                                    <td>${item.user.fullName}</td>
+                                    <td>${item.title}</td>
+                                    <td>${item.content}</td>
+                                    <td>${item.postedDay}</td>
+                                    <td>
+                                        <img src="http://localhost:8080/api/v1/Advertisements/image/${item.advertisementId}" width="60px" height="60px">  
+                                    </td>
+                                    <td>
+                                        <div class="btn-action d-flex justify-content-center">
+                                            <button id="btnUpdate" type="button" class="btn mt-1" data-bs-toggle="modal"
+                                                data-bs-target="#updatePostForm${item.advertisementId}">
+                                            <i class="bi bi-pencil-square" style="font-size: 16px;"></i>
+                                        </button>
+                                        <button id="btnDelete" type="button" class="btn mt-1" data-bs-toggle="modal"
+                                                data-bs-target="#deletePostForm${item.advertisementId}">
+                                            <i class="bi bi-trash3" style="font-size: 16px;color: #FF1E00"></i>
+                                        </button>
+                                        </div>    
+                                        
+                                    </td>
+                                </tr> 
+                            `;
+
+                        $("#myTable tbody").append(row);
+
+
+                        //Modal update Post
+                        var modalUpdate =
+                            `
+                        <form id="updatePost">
+                            <div class="modal fade" id="updatePostForm${item.advertisementId}" data-bs-keyboard="false"
+                                tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div
+                                    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                                    <div class="modal-content" style="color: black">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title fs-5" style="margin-top: 12px;"
+                                                id="exampleModalLabel">Chỉnh sửa bài viết</h5>
+
+                                            <button type="button" class="btn"
+                                                data-bs-dismiss="modal" aria-label="Close">
+                                                <i class="bi bi-x"
+                                                    style="font-size: 24px; color: black; margin-left: 60px;"></i>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row gutters">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="userIdUpdate${item.advertisementId}"
+                                                            style="margin: 10px 0">ID Người đăng
+                                                            bài</label>
+                                                        <select class="form-select form-control"
+                                                            aria-label="Default select example"
+                                                            id="userIdUpdate${item.advertisementId}" name="userIdUpdate${item.advertisementId}">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="title"
+                                                            style="margin: 10px 0">Tiêu đề</label>
+                                                        <input type="text" class="form-control"
+                                                            id="title" name="title" value="${item.title}"
+                                                            placeholder="Nhập tiêu đề">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="content"
+                                                            style="margin: 10px 0">Nội dung</label>
+                                                        <textarea type="text" class="form-control"
+                                                            id="content" name="content" 
+                                                            placeholder="Nhập nội dung">${item.content}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="file"
+                                                            style="margin: 10px 0">Image</label>
+                                                        <input type="file" class="form-control"
+                                                            id="file" name="file">
+                                                        <div class="post-avata mt-2">
+                                                            <img id="avatar" src="http://localhost:8080/api/v1/Advertisements/image/${item.advertisementId}" alt="postImg" width="320px" height="200px">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-cancel"
+                                                style="color: black;" data-bs-dismiss="modal">Trở
+                                                lại</button>
+                                            <button type="submit" class="btn btn-updatePostSubmit"
+                                                style="color: #fff; background-color: #2c6dd5;">
+                                                Chỉnh sửa bài viết
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        `;
+                        const modalConfirmDelete =
+                            `
+                        <!--Modal confirm Delete Class-->
+                                               
+                                                <div class="modal fade" id="deletePostForm${item.advertisementId}" data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title fs-5" style="margin-top: 12px; color: black" id="exampleModalLabel">Thông báo!</h5>
+                                                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                                                    <i class="bi bi-x" style="font-size: 24px; color: black; margin-left: 60px"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h5 class="mt-3 mb-3" style="color: black">Bạn có chắc chắn muốn xóa bài viết có ID = ${item.advertisementId} này!</h5>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-cancelDelete" data-bs-dismiss="modal" style="color: black">No</button>
+                                                                <button type="submit" class="btn btn-confirmDelete btn-confirmDelete${item.advertisementId} ml-2" style="color: #fff; background-color: #2c6dd5">Yes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- End Of Modal Confirm Delete -->
+                        `;
+
+
+
+                        content.append(modalUpdate);
+                        content.append(modalConfirmDelete);
+
+                        //Render list user and userId in Update form
+                        const UserIdSelectEleUpdate = document.getElementById(`userIdUpdate${item.advertisementId}`);
+                        console.log(UserIdSelectEleUpdate);
+
+                        fetch(`http://localhost:8080/api/v1/Users`)
+                            .then(response => response.json())
+                            .then(userData => {
+                                for (var i = 0; i < userData.length; i++) {
+                                    var userId = userData[i].userId;
+                                    var option = document.createElement("option");
+                                    option.text = userId;
+                                    option.setAttribute("value", userId);
+
+                                    console.log(option);
+                                    UserIdSelectEleUpdate.add(option);
+                                    
+                                    if(item.user.userId == userId){
+                                        option.selected = true;
+                                    }
+                                }
+                            })
+                            .catch(error => console.log(error));
+                        //End render    
+
+
+                        //Call Api delete Post
+                        const deletePostApi = `http://localhost:8080/api/v1/Advertisements/${item.advertisementId}`;
+
+                        var btnDel = document.querySelector(`.btn-confirmDelete${item.advertisementId}`);
+                        btnDel.addEventListener("click", async function () {
+
+
+                            const response = await fetch(deletePostApi, {
+                                method: 'DELETE',
+                            });
+                            if (!response.ok) {
+                                const message = `An error has accured: ${response.status}`;
+                                throw new Error(message);
+                            }
+                            //console.log(`Delete Class successfully!`);
+                            const buttnOpenModalDel = document.getElementById("delete-post-success");
+                            buttnOpenModalDel.click();
+                            setTimeout(function () { location.reload() }, 1000);
+
+                        });
+                        //End call Api delete post
+
+                        //Call Api update post
+
+                        //End call api update post
+                    });
+
+                    document.querySelector('.item').innerText = data.data.length;
+
+                    var totalPages = data.totalPages;
+                    createpagination(pagenum, totalPages);
+
+                },
+                error: function (xhr, status, error) {
+                    alert("Error: " + error);
+                }
+            });
+        }
+
+        function createpagination(pagenum, totalPages) {
+            $("#page_container").html("");
+
+            if (pagenum == 1) {
+                $("#page_container").append("<li class='page-item disabled previous'><a href='javascript:void(0)' class='page-link'><</a></li>");
+            } else {
+                $("#page_container").append(`<li class='page-item' onclick='makecall(${pagenum - 1})'><a href='javascript:void(0)' class='page-link'><</a></li>`);
+            }
+
+            for (var i = -1; i <= 1; i++) {
+                if (pagenum == (pagenum + i)) {
+                    $("#page_container").append(`<li class='page-item active'><a href='javascript:void(0)' class='page-link'>${pagenum + i} </a></li>`);
+                } else {
+                    if ((pagenum + i) >= 1 && (pagenum + i) <= totalPages) {
+                        $("#page_container").append(`<li class='page-item' onclick='makecall(${pagenum + i})'><a href='javascript:void(0)' class='page-link'>${pagenum + i}</a></li>`);
+                    }
+                }
+            }
+
+            if (pagenum == totalPages) {
+                $("#page_container").append("<li class='page-item disabled'><a href='javascript:void(0)' class='page-link'>></a></li>");
+            } else {
+                $("#page_container").append(`<li class='page-item next' onclick='makecall(${pagenum + 1})'><a href='javascript:void(0)' class='page-link'>></a></li>`);
+            }
+        }
+
+        function makecall(pagenum) {
+            loadData(pagenum);
+        }
+
+        //Render list UserId in select input
+        var userIdSelectEle = document.getElementById('userId');
+
+        fetch(`http://localhost:8080/api/v1/Users`)
+            .then(response => response.json())
+            .then(userData => {
+                for (var i = 0; i < userData.length; i++) {
+                    var userId = userData[i].userId;
+                    var option = document.createElement("option");
+                    option.text = userId;
+                    option.setAttribute("value", userId);
+                    userIdSelectEle.add(option);
+                }
+            })
+            .catch(error => console.log(error));
+
+        //End render list userId
+
+        //Call API Create new post
+        const form = document.getElementById('createNewPost');
+        form.addEventListener('submit', async event => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+
+            // var object = {};
+            // formData.forEach((value, key) => object[key] = value);
+            // var json = JSON.stringify(object);
+            // console.log(json);
+
+            const userId = formData.get("userId")
+
+            const response = await fetch(`http://localhost:8080/api/v1/Advertisements/${userId}/insert`, {
+                method: 'POST',
+                body: formData
+            });
+            if (!response.ok) {
+                const message = `An error has accured: ${response.status}`;
+                throw new Error(message);
+            }
+            const data = await response.json();
+            console.log(data);
+            //alert('update User successfully');
+
+            const buttnOpenModal = document.getElementById("add-post-success");
+            buttnOpenModal.click();
+
+
+        });
+                    // End of create new class
+
+    </script>
+    <!-- Use modal -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+        integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+        crossorigin="anonymous"></script> -->
+    <script src="js/Admin/login.js"></script>
+</body>
+
+</html>
